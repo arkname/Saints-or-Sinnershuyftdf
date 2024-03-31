@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <header>COAS</header>
+    <nav>
+        <ul>
+            <li>
+                <a href="livrobrabo.html">livro</a>
+                <a href="comunidade.html">comunidade</a>
+                <a href="layout.html">inicio</a>
+            </li>
+        </ul>
+    </nav>
+
+    <h1>vida</h1>
+    <main><p>Insira o número de lados do dado que você deseja rolar (3, 4, 6, 8, 10, 12, 20, 100):</p>
+        <input type="text" id="diceInput" pattern="(^[1-9]\d{0,1}d[3468101220]{1,2}$)" placeholder="Ex: 3d20">
+        <button onclick="rollDice()">Rolar Dado(s)</button>
+        <p id="rollResult"></p>
+    
+        <script>
+            function rollDice() {
+                var diceInput = document.getElementById("diceInput").value.trim().toLowerCase();
+    
+                // Verificar se a entrada do dado está no formato correto
+                if (!/^([1-9]\d{0,1})d([3468101220]{1,2})$/.test(diceInput)) {
+                    document.getElementById("rollResult").innerText = "Formato inválido para o dado. Por favor, insira a quantidade de dados seguida de 'd' e o número de lados (Ex: 3d20).";
+                    return;
+                }
+    
+                var parts = diceInput.split('d');
+                var numDice = parseInt(parts[0]);
+                var numSides = parseInt(parts[1]);
+    
+                // Rolar os dados e armazenar resultados
+                var results = [];
+                for (var i = 0; i < numDice; i++) {
+                    var rollResult = Math.floor(Math.random() * numSides) + 1;
+                    results.push(rollResult);
+                }
+    
+                // Exibir resultados
+                var resultText = "Você rolou " + numDice + " dado(s) de " + numSides + " lados e obteve: ";
+                resultText += results.join(', ');
+    
+                document.getElementById("rollResult").innerText = resultText;
+            }
+        
+        </script></main>
+</body>
+</html>
+
+
